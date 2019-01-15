@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import App from './App';
 import Admin from './admin';
+import Common from './common';
 
 // General
 import { Home } from './pages//home';
@@ -27,12 +28,22 @@ import { BasicTable, AdvTable } from './pages/table';
 // City 城市管理
 import { City } from './pages/city';
 
+// Order 订单管理
+import { Order, OrderDetail } from './pages/order';
+
+// User 用户管理
+import { User } from './pages/user';
+
+// Map 地图模块
+import { BikeMap } from './pages/map';
+
 export default class Router extends React.Component {
   
   render() {
     return (
       <HashRouter>
         <App>
+          <Route path="/login" component={Login} />
           <Route path="/admin" render={()=>
             <Admin>
               <Switch>
@@ -50,11 +61,19 @@ export default class Router extends React.Component {
                 <Route path="/admin/table/basic" component={BasicTable} />
                 <Route path="/admin/table/adv" component={AdvTable} />
                 <Route path="/admin/city" component={City} />
+                <Route path="/admin/order" component={Order} />
+                <Route path="/admin/user" component={User} />
+                <Route path="/admin/bikeMap" component={BikeMap} />
                 <Route component={NoMatch} />
               </Switch>
             </Admin>
           }/>
-          <Route path="/login" component={Login} />
+          <Route path="/common" render={() =>
+            <Common>
+              <Route path="/common/order/detail/:orderId" component={OrderDetail} />
+            </Common>
+          }
+          />
         </App>
       </HashRouter>
     );

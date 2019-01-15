@@ -1,15 +1,17 @@
 import JsonP from 'jsonp';
 import axios from 'axios';
-import { Modal } from 'antd';
+import {
+  Modal
+} from 'antd';
 
 export default class Axios {
 
-  static jsonp (options) {
+  static jsonp(options) {
     return new Promise((resolve, reject) => {
       JsonP(options.url, {
         param: 'callback'
       }, function (err, response) {
-        if(response.status === 'success') {
+        if (response.status === 'success') {
           resolve(response);
         } else {
           reject(response.message);
@@ -34,9 +36,11 @@ export default class Axios {
         method: 'get',
         baseURL: baseApi,
         timeout: 5000,
+        // params随url一起发送?name1=params[name1]
         params: (options.data && options.data.params) || '',
+        // data是作为请求主题被发送的数据
+        // data: ...
       }).then((response) => {
-        
         if (options.data && options.data.isShowLoading !== false) {
           loading = document.getElementById('ajaxLoading');
           loading.style.display = 'none';
@@ -56,6 +60,29 @@ export default class Axios {
         }
       })
     });
+
+    /*
+    static requestList(url, params, isMock) {
+      let data = {
+        params: params,
+        isMock,
+      };
+      this.ajax({
+        url,
+        data,
+      }).then((data) => {
+        if (data && data.result) {
+          let list = data.result.item_list.map((item, index) => {
+            item.key = index;
+            return item;
+          });
+          this.setState({
+            // ...
+          });
+        }
+      });
+    }
+  */
   }
 }
 

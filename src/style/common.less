@@ -1,6 +1,21 @@
 @import './default.less';
 @import './loading.less';
 
+
+ul,li{
+  list-style: none;
+}
+
+// 清除浮动，避免列标签塌陷
+.clearfix{
+  &::after{
+      content:' ';
+      clear:both;
+      display: block;
+      visibility: hidden;
+  }
+}
+
 .container {
   .nav-left {
     height: calc(100vh);
@@ -26,5 +41,11 @@
   .ant-table-wrapper {
     margin-left: -1px;
     margin-right: -2px;
+  }
+}
+
+.operate-wrap {
+  button {
+    margin-right: 10px;
   }
 }

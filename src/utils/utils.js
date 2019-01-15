@@ -1,3 +1,7 @@
+import React from 'react';
+import { Select } from 'antd';
+const Option = Select.Option;
+
 export default {
 
   // 日期格式化
@@ -26,4 +30,32 @@ export default {
       showQuickJumper: true,
     }
   },
+
+  // 创建<Option>标签列表
+  getOptionList(data) {
+    if (!data) {
+      return [];
+    }
+    let options = [];
+    data.forEach((item) => {
+      options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
+    });
+    return options;
+  },
+
+  //  
+  updateSelectedItem(selectedRowKeys, selectedItem, selectedIds) {
+    if (selectedIds) {
+      this.setState({
+        selectedRowKeys: selectedRowKeys, 
+        selectedItem: selectedItem, 
+        selectedIds: selectedIds
+      });
+    } else {
+      this.setState({
+        selectedRowKeys,
+        selectedItem
+      });
+    }
+  }
 }

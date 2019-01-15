@@ -84,9 +84,9 @@ export default class City extends Component {
       },
       {
         title: '用车模式',
-        dataIndex: 'mode',
-        render(mode) {
-          return mode === 1 ? '停车点' : '禁停区';
+        dataIndex: 'user_mode',
+        render(user_mode) {
+          return user_mode === 1 ? '停车点' : '禁停区';
         }
       },
       {
