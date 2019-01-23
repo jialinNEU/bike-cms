@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { Menu } from 'antd';
+import { connect } from 'react-redux';
+import { switchMenu } from './../../redux/action';
 
 import MenuConfig from './../../config/menuConfig';
 import './style.less';
 
-export default class NavLeft extends Component {
+class NavLeft extends Component {
+  state = {
+    currentKey: ''
+  };
   
   componentWillMount () {
     const menuTreeNode = this.renderMenu(MenuConfig);
+    let currentKey = window.location.hash.replace(/#|\?.*$/g, '');
     this.setState({
-      menuTreeNode
+      menuTreeNode,
+      currentKey
+    });
+  }
+
+  // 点击事件修改currentKey值
+  handleClick = (item) => {
+    // connect关联后具有的this.props.dispatch
+    const { dispatch } = this.props;
+    dispatch(switchMenu(item.item.props.title));
+    this.setState({
+      currentKey: item.key
     });
   }
 
@@ -40,6 +57,8 @@ export default class NavLeft extends Component {
           <h1>Bike CMS</h1>
         </div>
         <Menu
+          onClick={this.handleClick}
+          selectedKeys={[this.state.currentKey]}
           theme="dark"
         >
           { this.state.menuTreeNode }
@@ -48,3 +67,5 @@ export default class NavLeft extends Component {
     );
   }
 }
+
+export default connect()(NavLeft);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'antd';
+import { Card } from 'antd';
 
 import { BaseForm } from './../../components/BaseForm';
 import Axios from './../../axios/index';

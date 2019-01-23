@@ -44,7 +44,6 @@ export default class BaseTable extends Component {
   }
 
   onSelectChange = (selectedRowKeys, selectedRows) => {
-    console.log(selectedRows);
     let rowSelection = this.props.rowSelection;
     const selectedIds = [];
     if (rowSelection === 'checkbox') {
